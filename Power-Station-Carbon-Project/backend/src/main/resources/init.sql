@@ -80,3 +80,35 @@ INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_name`, `path`, `component`) VAL
 (4,  0, '碳排管理', '/carbon',     NULL),
 (5,  4, '数据看板', '/carbon/dashboard', 'carbon/dashboard/index'),
 (6,  4, '排放记录', '/carbon/records',   'carbon/records/index');
+
+-- ----------------------------
+-- 5. 用户管理模块表 (sys_user_management)
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_management`;
+CREATE TABLE `sys_user_management` (
+    `id`           BIGINT       NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `user_name`    VARCHAR(64)  NOT NULL                COMMENT '用户名',
+    `real_name`    VARCHAR(64)  DEFAULT NULL            COMMENT '真实姓名',
+    `gender`       TINYINT      DEFAULT 0               COMMENT '性别（0未知 1男 2女）',
+    `phone`        VARCHAR(20)  DEFAULT NULL            COMMENT '手机号',
+    `email`        VARCHAR(128) DEFAULT NULL            COMMENT '邮箱',
+    `department`   VARCHAR(128) DEFAULT NULL            COMMENT '所属部门',
+    `position`     VARCHAR(128) DEFAULT NULL            COMMENT '职位',
+    `status`       TINYINT      DEFAULT 1               COMMENT '状态（0禁用 1启用）',
+    `remark`       VARCHAR(500) DEFAULT NULL            COMMENT '备注',
+    `role_id`      BIGINT       DEFAULT NULL            COMMENT '角色ID（关联 sys_role.id）',
+    `create_time`  DATETIME     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`  DATETIME     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE KEY `uk_user_name` (`user_name`) USING BTREE COMMENT '用户名唯一索引',
+    KEY `idx_department` (`department`) USING BTREE     COMMENT '部门索引',
+    KEY `idx_status` (`status`) USING BTREE             COMMENT '状态索引',
+    KEY `idx_role_id` (`role_id`) USING BTREE           COMMENT '角色ID索引'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户管理表';
+
+-- 初始化用户管理种子数据
+INSERT INTO `sys_user_management` (`user_name`, `real_name`, `gender`, `phone`, `email`, `department`, `position`, `status`, `remark`, `role_id`) VALUES
+('zhangsan',  '张三', 1, '13800138001', 'zhangsan@example.com', '技术部', '高级工程师',   1, '技术核心成员',       2),
+('lisi',      '李四', 2, '13800138002', 'lisi@example.com',     '产品部', '产品经理',     1, NULL,                 2),
+('wangwu',    '王五', 1, '13800138003', 'wangwu@example.com',   '运维部', '运维工程师',   0, '账号已停用',         2),
+('zhaoliu',   '赵六', 1, '13800138004', 'zhaoliu@example.com',  '市场部', '市场主管',     1, '负责华东区域市场',   2);

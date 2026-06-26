@@ -48,6 +48,11 @@ const MainLayout: React.FC = () => {
           icon: <DatabaseOutlined />,
           label: "排放记录",
         },
+        {
+          key: "/carbon/user-management",
+          icon: <UserOutlined />,
+          label: "用户管理",
+        },
       ],
     },
   ];
