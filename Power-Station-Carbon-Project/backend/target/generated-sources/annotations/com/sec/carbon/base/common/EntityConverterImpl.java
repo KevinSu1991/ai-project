@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-06-24T12:44:30+0800",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.0.v20260407-0427, environment: Java 21.0.10 (Eclipse Adoptium)"
+    date = "2026-06-25T09:08:43+0800",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class EntityConverterImpl implements EntityConverter {
@@ -44,11 +44,11 @@ public class EntityConverterImpl implements EntityConverter {
 
         RoleVO roleVO = new RoleVO();
 
-        roleVO.setCreateTime( role.getCreateTime() );
-        roleVO.setDescription( role.getDescription() );
         roleVO.setId( role.getId() );
-        roleVO.setRoleKey( role.getRoleKey() );
         roleVO.setRoleName( role.getRoleName() );
+        roleVO.setRoleKey( role.getRoleKey() );
+        roleVO.setDescription( role.getDescription() );
+        roleVO.setCreateTime( role.getCreateTime() );
 
         return roleVO;
     }
