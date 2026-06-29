@@ -2,6 +2,7 @@
  * Axios 请求封装
  * <p>统一拦截请求和响应，处理 Result&lt;T&gt; 的 code 逻辑</p>
  * <p>非 200 状态码自动触发 message.error 提示</p>
+ * <p>TODO: 当前已注释掉权限认证跳转逻辑，开发调试阶段使用</p>
  */
 
 import axios, { AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
@@ -26,14 +27,15 @@ const request: AxiosInstance = axios.create({
 /**
  * 请求拦截器
  * <p>在此处添加 Token 等公共请求头</p>
+ * <p>TODO: 当前已注释 Token 注入，开发调试阶段使用</p>
  */
 request.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    // 从 localStorage 获取 Token 并注入请求头
-    const token = localStorage.getItem("token");
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    // TODO: 已注释掉 Token 认证，开发调试阶段使用
+    // const token = localStorage.getItem("token");
+    // if (token && config.headers) {
+    //   config.headers.Authorization = `Bearer ${token}`;
+    // }
     return config;
   },
   (error) => {
@@ -62,8 +64,10 @@ request.interceptors.response.use(
       const status = error.response.status;
       switch (status) {
         case 401:
-          message.error("未登录，请重新登录");
+          // TODO: 已注释掉登录页跳转，开发调试阶段使用
+          // message.error("未登录，请重新登录");
           // 可在此处跳转登录页
+          console.warn("401 Unauthorized - auth disabled, skipping login redirect");
           break;
         case 403:
           message.error("权限不足");

@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/carbon_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password: your_password_here
+    password: qwe21qwe
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   # Jackson 日期格式

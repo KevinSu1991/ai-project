@@ -22,7 +22,8 @@ export default defineConfig({
     // 代理配置：将 /api 请求转发到后端 8080 端口
     proxy: {
       "/api": {
-        target: "http://10.236.20.68:8080",
+        // target: "http://10.236.20.68:8080",
+        target: "http://127.0.0.1:8080",
         changeOrigin: true,
         // 不重写路径，保持 /api 前缀
       },
@@ -30,13 +31,7 @@ export default defineConfig({
     // 文件监听配置：忽略 iCloud/spotlight/node_modules 等触发的虚假变更
     watch: {
       usePolling: false,
-      ignored: [
-        "**/node_modules/**",
-        "**/.git/**",
-        "**/.DS_Store",
-        "**/*.swp",
-        "**/*~",
-      ],
+      ignored: ["**/node_modules/**", "**/.git/**", "**/.DS_Store", "**/*.swp", "**/*~"],
     },
   },
 
